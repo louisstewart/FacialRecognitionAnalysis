@@ -117,7 +117,7 @@ class Resize(FeatureExtractor):
 
 class PCA(FeatureExtractor):
     """
-    Principal Component analysis on a dataset
+    Principal Component analysis on a data-set
 
     The principal components will be used to reduce the dimension of the input data
     as the top N components will be selected from the data, and an input image will
@@ -159,6 +159,12 @@ class DiscreteCosine(FeatureExtractor):
         """
         Take the 2D-DCT of the input and return a section of the low frequency as this
         contains the most energy
+
+        as per:
+
+        Kohir, V.V. and Desai, U.B., 1998, October.
+        Face recognition using a DCT-HMM approach.
+        In Applications of Computer Vision, 1998. WACV'98. Proceedings., Fourth IEEE Workshop on (pp. 226-231). IEEE.
 
         Args:
             x: input matrix
@@ -206,20 +212,26 @@ class DiscreteCosine(FeatureExtractor):
     def __zig_zag(self, matrix):
         """
         Zig-Zag scan of a matrix
+
+        as per:
+
+        Kohir, V.V. and Desai, U.B., 1998, October.
+        Face recognition using a DCT-HMM approach.
+        In Applications of Computer Vision, 1998. WACV'98. Proceedings., Fourth IEEE Workshop on (pp. 226-231). IEEE.
+
         Args:
             matrix: the DCT components
 
         Return:
             set of DCT components extracted by zig-zag scanning:
-            Kohir, V.V. and Desai, U.B., 1998, October.
-            Face recognition using a DCT-HMM approach.
-            In Applications of Computer Vision, 1998. WACV'98. Proceedings., Fourth IEEE Workshop on (pp. 226-231). IEEE.
+
         """
         return matrix.reshape(-1)[self.indices][:self.kernel_size].copy()
 
-    def __precompute_indices(self, shape):
+    @staticmethod
+    def __precompute_indices(shape):
         """
-        Pre-comute the indices we will use to extract the DCT co-efficients:
+        Pre-compute the indices we will use to extract the DCT co-efficients:
         Adapted from MatLab code given on StackOverflow:
         http://stackoverflow.com/questions/3024939/matrix-zigzag-reordering
 
