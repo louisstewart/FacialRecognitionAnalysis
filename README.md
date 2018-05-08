@@ -1,6 +1,7 @@
-# Facial Recognition Analysis: Investigating the Speed-Accuracy Trade-off
+# Facial Recognition Analysis: 
+##Investigating the Speed-Accuracy Trade-off
 
-## Analysis of Facial Recognition
+### Analysis of Facial Recognition
 
 This project contains 3 methods of facial recognition: __Convolutional Neural Networks__ using TensorFlow, 
 __Hidden Markov Models__, and __Support Vector Machines__.
@@ -20,13 +21,7 @@ For Support Vector Machines this is _Principal Component Analysis_, HMM is _Disc
 and CNN just uses _Mean Normalisation_ as input pre-processing - all other feature extraction filters are learned by the
 network during the end-to-end training process.
 
-## Testing
-
-There are test scripts for running all of these classifiers contained in `test/`.
-
-The data used can be found at [insert link]().
-
-
+### Setup
 
 First, create a virtual environment and install packages.
 ```bash
@@ -34,26 +29,85 @@ virtualenv -p python2.7 venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
+or if GPU neural net training is desired, use `requirements_gpu.txt`
 
 Then, set the PYTHONPATH env variable:
 ```bash
 export PYTHONPATH=$PYTHONPATH:~/path/to/project
 ```
 
-Then run one of the testing scripts:
+If using tensorflow GPU, don't forget to set LD_LIBRARY_PATH
 ```bash
-python project/test/svm_test.py -i ~/path/to/1m_train \
--t ~/path/to/1m_test -o ~/output_path --grey
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 ```
 
-Each test script allows for specifying the image streams used. Options are Greyscale, IR, RGB, Depth in any combination (except those with RGB and Greyscale).
-E.g.
-"--grey --ir", "--ir --depth", "--rgb --ir --depth", "--rgb"
+### Data
 
-The 4 test scripts are "svm_test.py", "cnn_test.py", "hmm_test.py" and "cv_test.py". The first 3 test each classifier type, and the last one shows different methods of Cross Verification (either Leave One Out, K Fold or a custom verification using user defined test sets). Options for "cv_test.py" are "--looc", "--kfold" or nothing for custom verification.
-e.g.
+The data used can be found at [insert link]().
+
+Data must then be split into Train, Test and Cross-Validation data-sets.
+To do this, the `train_test_split.py` file in `py_scripts` can be used. 
+It takes as argument the directory where the data sits.
+
+Example: assuming data is in folder called Manifold in previous directory
+level
 
 ```bash
-python project/test/cv_test.py -i ~/path/to/1m_train \
--t ~/path/to/1m_test -o ~/output_path --grey --ir --kfold
+python py_scripts/train_test_split.py ../Manifold/
+``` 
+
+This script splits each individual's image folder into a train, test and
+cv folders **per person** (no images from train appear in either 
+test or cv and vice-versa). To combine these into single **train**, 
+**test** and **cv** folders use:
+
+``bash
+python py_scripts/tt_move.py
+``
+
+This script takes no arguments, but assumes that the current directory is
+the one which contains each of the individual train, test and cv folders.
+
+### Testing
+
+The main test script for running all of these classifiers is
+contained in `py_scritps/facial_recognition_analysis.py`.
+
+It takes a number of arguments:
+
+`--svm`, `--cnn` and `--hmm` are used to specify model type (with
+above feature extraction).
+
+`-s` flag is used to save images to file serialised numpy arrays 
+after loading (useful for faster run next time)
+
+`-l` flag is used to specify that images should be loaded from 
+serialised numpy arrays, instead of raw images. 
+If `-l` is given, then directories for `-i`,`-t`,`-v` must 
+contain numpy arrays in serialised format.
+
+`-i`, `-t` and `-v` are used with a directory argument following to specify
+the directory were the **i**nput, **t**est and **v**alidation data are
+
+`-o` with a directory name following specifies the output directory
+
+`--grey`, `--rgb`, `--ir`, and `--depth` can be used to specify which
+image streams to use. Can use multiple at once, except `--rgb` and `--grey` 
+which cannot be used with each other.
+
+`--1m`, `--2m`, `--3m` and `--4m` can be used to filter images to one 
+distance only. E.g. 1 metre images with `--1m`.
+
+Full example, load images from directories called `train`, `test` and `cv` 
+in the Documents folder. Use CNN with Grey + IR images from 1 metre only:
+
+```bash
+python py_scripts/facial_recognition_main.py --cnn -s -i ~/Documents/train -t ~/Documents/test/ -o ~/Documents/cnn_out -v ~/Documents/cv/ --grey --ir --1m
+```
+
+Full example, load images from directories called `train`, `test` and `cv` 
+in the Documents folder. Use SVM with all RGB images:
+
+```bash
+python py_scripts/facial_recognition_main.py --cnn -s -i ~/Documents/train -t ~/Documents/test/ -o ~/Documents/cnn_out -v ~/Documents/cv/ --rgb
 ```

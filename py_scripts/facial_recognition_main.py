@@ -92,7 +92,7 @@ def main(argv):
             if arg == "":
                 print arg_string
                 sys.exit(2)
-            input_data = os.path.expanduser(arg)
+            input_data = functions.handle_filepath(arg)
             if not os.path.exists(input_data):
                 print "Error: Input folder does not exist"
                 sys.exit(2)
@@ -100,7 +100,7 @@ def main(argv):
             if arg == "":
                 print arg_string
                 sys.exit(2)
-            test_data = os.path.expanduser(arg)
+            test_data = functions.handle_filepath(arg)
             if not os.path.exists(test_data):
                 print "Error: Test Input folder does not exist"
                 sys.exit(2)
@@ -109,7 +109,7 @@ def main(argv):
                 print arg_string
                 sys.exit(2)
             cross_verify = True
-            cv_data = os.path.expanduser(arg)
+            cv_data = functions.handle_filepath(arg)
             if not os.path.exists(cv_data):
                 print "Error: Cross Verification Input folder does not exist"
                 sys.exit(2)
@@ -117,7 +117,7 @@ def main(argv):
             if arg == "":
                 print arg_string
                 sys.exit(2)
-            output = os.path.expanduser(arg)
+            output = functions.handle_filepath(arg)
             if not os.path.exists(output):
                 os.mkdir(output)
 
