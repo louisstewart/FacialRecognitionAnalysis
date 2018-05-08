@@ -68,6 +68,13 @@ python py_scripts/tt_move.py
 This script takes no arguments, but assumes that the current directory is
 the one which contains each of the individual train, test and cv folders.
 
+Alternatively use the following bash script to do it all in one go:
+
+```bash
+bash_scripts/split.sh ../path/to/image/folder
+```
+
+
 ### Testing
 
 The main test script for running all of these classifiers is

@@ -11,15 +11,22 @@ args = sys.argv
 drop_count = 0
 drop_max = 100
 
-if len(args) > 1:
-    drop_max = int(args[1])
+if len(args) < 2:
+    print("usage: %s <input_dir>" % args[0])
+    sys.exit(1)
 
+in_dir = args[1]
 current = os.getcwd()
+current = os.path.join(current, in_dir)
+
+if not os.path.exists(current):
+    raise IOError("Image folder not found")
+
+os.chdir(current)
 
 train_img = glob.glob("*_train")
 test_img = glob.glob("*_test")
 cv_img = glob.glob("*_cv")
-
 
 train = "train"
 test = "test"

@@ -11,8 +11,15 @@ if len(args) < 2:
     print("usage: %s <input_dir>" % args[0])
     sys.exit(1)
 
-current = os.getcwd()
 in_dir = args[1]
+current = os.getcwd()
+current = os.path.join(current, in_dir)
+
+if not os.path.exists(current):
+    raise IOError("Image folder not found")
+
+os.chdir(current)
+
 print in_dir
 num = in_dir.split(" ")[1]
 train = num+"_train"
@@ -69,7 +76,7 @@ p_id = ""
 drop_count = 0
 drop_max = 100
 
-os.chdir(os.path.join(current, in_dir))
+
 for subdir, dirs, files in os.walk('./'):
     for f in files:
         orig_path = os.path.join(subdir, f)
