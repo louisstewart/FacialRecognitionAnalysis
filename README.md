@@ -1,5 +1,5 @@
 # Facial Recognition Analysis: 
-##Investigating the Speed-Accuracy Trade-off
+## Investigating the Speed-Accuracy Trade-off
 
 ### Analysis of Facial Recognition
 
