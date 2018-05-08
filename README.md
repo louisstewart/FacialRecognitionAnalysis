@@ -43,7 +43,7 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 
 ### Data
 
-The data used can be found at [insert link]().
+The data used can be found at [St Andrews Faces Archive](https://archive.cs.st-andrews.ac.uk/faces/).
 
 Data must then be split into Train, Test and Cross-Validation data-sets.
 To do this, the `train_test_split.py` file in `py_scripts` can be used. 
