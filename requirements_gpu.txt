@@ -69,7 +69,7 @@ PyYAML==3.12
 pyzmq==15.2.0
 qtconsole==4.3.1
 raven==6.6.0
-requests==2.18.4
+requests==2.20.0
 requests-toolbelt==0.8.0
 scandir==1.6
 scikit-learn==0.19.1
