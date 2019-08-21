@@ -85,7 +85,7 @@ tf-nightly==1.5.0.dev20171212
 tornado==4.2.1
 traitlets==4.3.2
 unity-lens-photos==1.0
-urllib3==1.22
+urllib3==1.24.2
 virtualenv==15.1.0
 wcwidth==0.1.7
 webencodings==0.5.1
