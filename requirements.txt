@@ -10,7 +10,7 @@ opencv-python==3.2.0.6
 packaging==16.8
 pbr==2.0.0
 protobuf==3.2.0
-py==1.4.32
+py==1.10.0
 pyparsing==2.2.0
 pytest==3.0.6
 python-dateutil==2.6.0
