@@ -6,7 +6,7 @@ hmmlearn==0.2.0
 matplotlib==2.0.0
 mock==2.0.0
 numpy==1.12.1
-opencv-python==3.2.0.6
+opencv-python==3.4.7.28
 packaging==16.8
 pbr==2.0.0
 protobuf==3.2.0
