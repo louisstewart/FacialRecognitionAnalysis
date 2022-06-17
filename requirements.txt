@@ -5,7 +5,7 @@ functools32==3.2.3.post2
 hmmlearn==0.2.0
 matplotlib==2.0.0
 mock==2.0.0
-numpy==1.12.1
+numpy==1.21.0
 opencv-python==3.2.0.6
 packaging==16.8
 pbr==2.0.0
