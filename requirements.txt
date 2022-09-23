@@ -9,7 +9,7 @@ numpy==1.12.1
 opencv-python==3.2.0.6
 packaging==16.8
 pbr==2.0.0
-protobuf==3.2.0
+protobuf==3.18.3
 py==1.4.32
 pyparsing==2.2.0
 pytest==3.0.6
